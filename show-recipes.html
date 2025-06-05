@@ -24,7 +24,7 @@
             const id = getId();
             function getRecipe(){
                 const rootPath = "https://mysite.itvarsity.org/api/recipe-book/";
-                var fullPath = rootPath + "get-recipes/?catagory=" + catagory;
+                var fullPath = rootPath + "get-recipes/?category=" + category;
 
                 fetch(fullPath)
                     .then(function(response){
@@ -33,7 +33,7 @@
                     })
                     .then(function(data){
                         //fixing the back button
-                        document.getElementById("back-link").href = "list-recipes.html?catagory=" + data[0].category; 
+                        document.getElementById("back-link").href = "list-recipes.html?category=" + data[0].category; 
                         var output = ""; 
                         // output Template
                         output += `
