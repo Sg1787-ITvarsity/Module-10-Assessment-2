@@ -24,7 +24,7 @@
             const id = getId();
             function getRecipe(){
                 const rootPath = "https://mysite.itvarsity.org/api/recipe-book/";
-                const fullPath = rootPath + "get-recipe/?id=" + id; 
+                var fullPath = rootPath + "get-recipes/?category=" + category;
 
                 fetch(fullPath)
                     .then(function(response){
