@@ -1,60 +1,84 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>My Recipe Book</title>
+
+    <head>        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="fontAwesome/css/all.css">
+        <title> My Recipe Book App</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="fontawesome/css/all.css">
+        <link rel="shortcut icon" href="pictures/Another one.png" type="image/x-icon">
     </head>
+    
     <body class="body-meals" onload="getRecipeList()">
+        
         <div class="header">
+        
             <a href="index.html">
-                <i class="fa-sharp fa-solid fa-chevron-left"></i>
+                
+                <i class="fa-solid fa-circle-chevron-left"> </i>
+                
             </a>
-            <img src="images/logo-text.png">
+            
+            <img src="pictures/logo-text.png">
+        
         </div>
+        
         <div id="meals">
-                <div class="meals-list" id="output">
-                                            
-                </div>
+        
+            <div class="meals-list" id="output">
+            
+                
+            </div>
+    
+        </div>
 
-            <script>
-                var category = getCategory();
+        <script>
 
-                function getRecipeList(){
-                    var rootPath = "https://mysite.itvarsity.org/api/recipe-book/";
-                    var fullPath = rootPath + "get-recipes/?category=" + category;
-                    
-                    fetch(fullPath)
-                        .then(function(response){
-                            return response.json();
-                        })
-                        .then(function(data){
-                            var output = ""; 
-                            for(a = 0; a < data.length; a++){
-                                output += `
-                                    <a href = "show-recipes.html?id=${data[a].id}">
-                                        <div class = "meals-list-item">
-                                            <h1> ${data[a].title} <i class= "fas fa-chevron-circle-right"></i> </h1>
-                                            <p> ${data[a].description} </p>
-                                        </div>    
-                                        
-                                    </a>
-                                `;
+            var category = getCategory();
+
+          function getRecipeList(){
+                var rootPath = "https://mysite.itvarsity.org/api/recipe-book/";
+                var fullPath = rootPath + "get-recipes/?category=" + category;
+
+                fetch(fullPath)
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+
+                    var output = "";
+
+                    for(a = 0; a< data.length; a++){
+
+                        output += `
+                            <a href="show-recipe.html?id=${data[a].id}">
+
+                                <div class="meals-list-item">
                                 
-                            }
-                            document.getElementById("output").innerHTML = output;
-                        })
-                }
+                                    <h1> ${data[a].title} <i class="fas fa-chevron-circle-right"></i> </h1>
+                                    <p> ${data[a].description}</p>
+                                    
+                                </div>
 
-                function getCategory() {
-                    var url = window.location.href;
-                    var pos = url.search("=");
-                    var category = url.slice(pos + 1); 
+                            </a>
+                        `;
+                    }
+                    
+                    document.getElementById("output").innerHTML = output;
+                })
+          }
 
-                    return category;
-                }
-            </script>
+          function getCategory(){
+                var url = window.location.href;
+                var pos = url.search("=");
+                var category = url.slice(pos + 1);
+
+                return category;
+          }  
+
+        </script>
+    
     </body>
+
 </html>
